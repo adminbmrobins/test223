@@ -7,7 +7,7 @@ on:
     - dev
 jobs:
   job1:
-    runs-on: ubutntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: task 1 for printing OS details
         run: uname -a
