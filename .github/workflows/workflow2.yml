@@ -32,7 +32,7 @@ jobs:
           echo " ${{ secrets.token1 }} " >> /tmp/brent-pass
           pwd
           java -version
-         if: echo " github.event_name == 'pull_request" 
+         if: github.event_name == 'pull_request' 
        - run: echo " Print value of user 3 $user3"
   test:
      runs-on: brent-devops
