@@ -15,7 +15,7 @@ jobs:
      env:
        USER2: sandeep
        USER1: sandeep_job
-     runs-on: ubuntu-latest
+     runs-on: brent-devops
      steps:
        - name: Checkout
          uses: actions/checkout@v4.1.1
@@ -34,7 +34,7 @@ jobs:
           java -version
        - run: echo " Print value of user 3 $user3"
   test:
-     runs-on: ubuntu-latest
+     runs-on: brent-devops
      environment: prod
      steps:
        - name: Checkout
@@ -48,7 +48,7 @@ jobs:
           echo " ${{ secrets.token1 }} " >> /tmp/gagan-pass
 
   deploy:
-     runs-on: ubuntu-latest
+     runs-on: brent-devops
      steps:
        - name: Checkout
          uses: actions/checkout@v4.1.1
