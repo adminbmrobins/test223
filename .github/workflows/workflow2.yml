@@ -58,5 +58,5 @@ jobs:
           echo "github repo name is ${{ GITHUB.REPOSITORY }} and branch name is ${{ GITHUB.REF_NAME }} "
           echo " Value for user1 and servername are ${{ vars.user1 }} and ${{ vars.server_name }}"
           echo "password for env is ${{ secrets.token_repo }} "
-          echo " ${{ secrets.token1 }} " >> /tmp/brent-pass
+          echo " ${{ secrets.token_repo }} " >> /tmp/brent-pass
           
