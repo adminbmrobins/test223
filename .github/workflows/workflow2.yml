@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
 env:
   USER1: gagandeep
 jobs:
@@ -15,7 +13,7 @@ jobs:
      env:
        USER2: sandeep
        USER1: sandeep_job
-     runs-on: brent-devops
+     runs-on: ubuntu-latest
      steps:
        - name: Checkout
          uses: actions/checkout@v4.1.1
@@ -29,37 +27,38 @@ jobs:
           echo "Value for variable user1, user2 and user3 are $USER1 $USER2 $user3"
           echo " Value for user1 and servername are ${{ vars.user1 }} and ${{ vars.server_name }}"
           echo "password for env is ${{ secrets.token1 }} "
-          echo " ${{ secrets.token1 }} " >> /tmp/brent-pass
+          echo " ${{ secrets.token1 }} " >> /tmp/gagan-pass
           pwd
           java -version
-         if: github.event_name == 'pull_request' 
+         if: github.event_name == 'pull_request'
        - run: echo " Print value of user 3 $user3"
-  test:
-     runs-on: brent-devops
+  prod-deploy:
+     runs-on: ubuntu-latest
      environment: prod
      steps:
        - name: Checkout
          uses: actions/checkout@v4.1.1
-       - name: step 2
+       - name: step 2 run only on Linux
          if: runner.os == 'Linux'
          run: |
           ls -l
           echo "github repo name is ${{ GITHUB.REPOSITORY }} and branch name is ${{ GITHUB.REF_NAME }} "
           echo " Value for user1 and servername are ${{ vars.user1 }} and ${{ vars.server_name }}"
           echo "password for env is ${{ secrets.token1 }} "
-          echo " ${{ secrets.token1 }} " >> /tmp/brent-pass
+          echo " ${{ secrets.token1 }} " >> /tmp/gagan-pass
           echo " ${{ runner.os }} "
   deploy:
-     runs-on: brent-devops
+     runs-on: ubuntu-latest
      steps:
        - name: Checkout
          uses: actions/checkout@v4.1.1
-       - name: step 2
+       - name: step 2 run only on windows
          if: runner.os != 'Linux'
          run: |
           ls -l
           echo "github repo name is ${{ GITHUB.REPOSITORY }} and branch name is ${{ GITHUB.REF_NAME }} "
           echo " Value for user1 and servername are ${{ vars.user1 }} and ${{ vars.server_name }}"
           echo "password for env is ${{ secrets.token_repo }} "
+          echo " ${{ secrets.token_repo }} " >> /tmp/gagan-pass
           echo " ${{ runner.os }} "
-          echo " ${{ secrets.token_repo }} " >> /tmp/brent-pass      
+          cat /tmp/gagan-pass
